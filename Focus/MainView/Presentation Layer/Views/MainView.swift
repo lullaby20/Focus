@@ -30,29 +30,24 @@ struct MainView: View {
     }
     
     var contentView: some View {
-        GeometryReader { geometry in
-            VStack(spacing: 0) {
-                logoView
-                
-                Spacer()
-                
-                ScrollView(.vertical, showsIndicators: false) {
-                    LazyVStack(spacing: 0) {
-                        ForEach(viewModel.quotes, id: \.self) { quote in
-                            QuoteView(text: quote.quote, author: quote.author)
-                                .frame(height: geometry.size.height * 0.91)
-                        }
-                    }
-                    .scrollTargetLayout()
+        ScrollView(.vertical, showsIndicators: false) {
+            LazyVStack(spacing: 0) {
+                ForEach(viewModel.quotes, id: \.self) { quote in
+                    QuoteView(text: quote.quote, author: quote.author)
+                        .containerRelativeFrame(.vertical, count: 1, spacing: 0)
                 }
-                .scrollTargetBehavior(.paging)
-                
-                Spacer()
-                
-                bottomBottomsView
             }
-            .padding(.horizontal, 30)
+            .scrollTargetLayout()
         }
+        .ignoresSafeArea()
+        .scrollTargetBehavior(.paging)
+        .overlay(alignment: .top) {
+            logoView
+        }
+        .overlay(alignment: .bottom) {
+            bottomBottomsView
+        }
+        .padding(.horizontal, 30)
     }
     
     var logoView: some View {
