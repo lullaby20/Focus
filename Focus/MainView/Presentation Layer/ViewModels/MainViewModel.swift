@@ -17,9 +17,9 @@ final class MainViewModel: ObservableObject {
     
     private var quoteService: QuoteServiceProtocol
     private var cancellables: Set<AnyCancellable> = .init()
+    private(set) var quoteViewModels: [QuoteViewModel] = []
     
     @Published var state: State = .loading
-    @Published var quotes: [QuoteModel] = []
     
     init(quoteService: QuoteServiceProtocol) {
         self.quoteService = quoteService
@@ -40,7 +40,7 @@ final class MainViewModel: ObservableObject {
                 }
             } receiveValue: { [weak self] quotes in
                 guard let self else { return }
-                self.quotes = quotes
+                self.quoteViewModels = quotes.map { QuoteViewModel(model: $0) }
             }
             .store(in: &cancellables)
     }

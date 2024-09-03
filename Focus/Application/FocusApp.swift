@@ -27,7 +27,7 @@ struct FocusApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainView(viewModel: .init(quoteService: quoteService))
+            MainView(viewModel: MainViewModel(quoteService: quoteService))
         }
 //        .modelContainer(sharedModelContainer)
     }

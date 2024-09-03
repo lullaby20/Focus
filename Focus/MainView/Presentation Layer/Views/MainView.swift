@@ -30,55 +30,42 @@ struct MainView: View {
     }
     
     var contentView: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            LazyVStack(spacing: 0) {
-                ForEach(viewModel.quotes, id: \.self) { quote in
-                    QuoteView(text: quote.quote, author: quote.author)
-                        .containerRelativeFrame(.vertical, count: 1, spacing: 0)
-                }
-            }
-            .scrollTargetLayout()
-        }
-        .ignoresSafeArea()
-        .scrollTargetBehavior(.paging)
-        .overlay(alignment: .top) {
+        VStack(spacing: 0) {
             logoView
-        }
-        .overlay(alignment: .bottom) {
-            bottomBottomsView
+            
+            ScrollView(.vertical, showsIndicators: false) {
+                LazyVStack(spacing: 0) {
+                    ForEach(viewModel.quoteViewModels, id: \.self) { viewModel in
+                        QuoteView(viewModel: viewModel)
+                            .containerRelativeFrame(.vertical, count: 1, spacing: 0)
+                    }
+                }
+                .scrollTargetLayout()
+            }
+            .ignoresSafeArea()
+            .scrollTargetBehavior(.paging)
+            
+            tapForMoreView
         }
         .padding(.horizontal, 30)
     }
     
     var logoView: some View {
         Image(.logo)
-            .frame(maxWidth: .infinity, alignment: .topLeading)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.vertical, 8)
     }
     
-    var bottomBottomsView: some View {
-        HStack(spacing: 20) {
-            Button(action: {
-                //
-            }, label: {
-                Text("tap for more")
-                    .font(.system(size: 20, weight: .regular))
-                    .foregroundColor(.customGray)
-            })
-            
-            Spacer()
-            
-            Button(action: {
-                //
-            }, label: {
-                Image(.save)
-            })
-            
-            Button(action: {
-                //
-            }, label: {
-                Image(.share)
-            })
-        }
+    var tapForMoreView: some View {
+        Button(action: {
+            //
+        }, label: {
+            Text("tap for more")
+                .font(.system(size: 20, weight: .regular))
+                .foregroundColor(.customGray)
+        })
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.vertical, 8)
     }
     
     var loadingView: some View {
@@ -101,7 +88,7 @@ struct MainView: View {
                 
                 Spacer()
                 
-                bottomBottomsView
+                tapForMoreView
             }
             .padding(.horizontal, 30)
         }

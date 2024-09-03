@@ -8,20 +8,39 @@
 import SwiftUI
 
 struct QuoteView: View {
-    var text: String
-    var author: String
+    @ObservedObject var viewModel: QuoteViewModel
     
     var body: some View {
         VStack(spacing: 8) {
-            Text(text)
+            Text(viewModel.text)
                 .font(.system(size: 40, weight: .light))
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text("- " + author)
+            Text(viewModel.author)
                 .font(.system(size: 25, weight: .light))
                 .foregroundColor(.customGray)
                 .frame(maxWidth: .infinity, alignment: .leading)
+            
+            HStack(spacing: 10) {
+                Button {
+                    viewModel.save()
+                } label: {
+                    Image(viewModel.isSaved ? .saveFill : .save)
+                }
+
+                Button {
+                    viewModel.share()
+                } label: {
+                    Image(.share)
+                }
+
+            }
+            .frame(maxWidth: .infinity, alignment: .trailing)
+        }
+        .sheet(isPresented: $viewModel.showShareSheet) {
+            ShareSheet(text: viewModel.shareText)
+                .presentationDetents([.medium])
         }
     }
 }
