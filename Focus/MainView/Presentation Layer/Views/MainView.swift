@@ -48,6 +48,10 @@ struct MainView: View {
             tapForMoreView
         }
         .padding(.horizontal, 30)
+        .sheet(isPresented: $viewModel.showCategoriesSheet) {
+            CategoriesView(viewModel: viewModel.categoriesViewModel)
+                .presentationDetents([.medium, .large])
+        }
     }
     
     var logoView: some View {
@@ -58,7 +62,7 @@ struct MainView: View {
     
     var tapForMoreView: some View {
         Button(action: {
-            //
+            viewModel.openCategories()
         }, label: {
             Text("tap for more")
                 .font(.system(size: 20, weight: .regular))

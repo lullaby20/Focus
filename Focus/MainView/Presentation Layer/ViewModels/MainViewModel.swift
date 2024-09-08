@@ -18,11 +18,14 @@ final class MainViewModel: ObservableObject {
     private var quoteService: QuoteServiceProtocol
     private var cancellables: Set<AnyCancellable> = .init()
     private(set) var quoteViewModels: [QuoteViewModel] = []
+    private(set) var categoriesViewModel: CategoriesViewModel
     
     @Published var state: State = .loading
+    @Published var showCategoriesSheet: Bool = false
     
     init(quoteService: QuoteServiceProtocol) {
         self.quoteService = quoteService
+        self.categoriesViewModel = CategoriesViewModel(quoteService: quoteService)
     }
     
     func getQuotes() {
@@ -43,5 +46,9 @@ final class MainViewModel: ObservableObject {
                 self.quoteViewModels = quotes.map { QuoteViewModel(model: $0) }
             }
             .store(in: &cancellables)
+    }
+    
+    func openCategories() {
+        showCategoriesSheet.toggle()
     }
 }
