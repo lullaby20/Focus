@@ -48,6 +48,10 @@ final class MainViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
+    func getQuotes(by categories: [CategoryModel]) {
+        print(categories)
+    }
+    
     func openCategories() {
         showCategoriesSheet.toggle()
     }

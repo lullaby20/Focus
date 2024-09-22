@@ -18,6 +18,7 @@ final class CategoriesViewModel: ObservableObject {
     private var quoteService: QuoteServiceProtocol
     private var cancellables: Set<AnyCancellable> = .init()
     private(set) var categories: [CategoryModel] = []
+    var selectedCategories: [CategoryModel] = []
     
     @Published var state: State = .loading
     

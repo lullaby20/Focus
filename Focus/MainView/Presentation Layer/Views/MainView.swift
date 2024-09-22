@@ -49,8 +49,10 @@ struct MainView: View {
         }
         .padding(.horizontal, 30)
         .sheet(isPresented: $viewModel.showCategoriesSheet) {
-            CategoriesView(viewModel: viewModel.categoriesViewModel)
-                .presentationDetents([.medium, .large])
+            CategoriesView(viewModel: viewModel.categoriesViewModel) { categories in
+                viewModel.getQuotes(by: categories)
+            }
+            .presentationDetents([.medium, .large])
         }
     }
     
