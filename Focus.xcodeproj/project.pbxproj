@@ -17,6 +17,7 @@
 		F62385402C87850B00EE3A79 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F623853F2C87850B00EE3A79 /* CategoryModel.swift */; };
 		F62385442C87862700EE3A79 /* URLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62385432C87862700EE3A79 /* URLExtension.swift */; };
 		F62385462C87872900EE3A79 /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62385452C87872900EE3A79 /* CategoriesViewModel.swift */; };
+		F64268D82D45802200DA0821 /* Noise.metal in Sources */ = {isa = PBXBuildFile; fileRef = F64268D72D45802200DA0821 /* Noise.metal */; };
 		F672D78A2C827D49003D974E /* QuoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F672D7892C827D49003D974E /* QuoteViewModel.swift */; };
 		F6F3EF0E2BF1048A006F0667 /* FocusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F3EF0D2BF1048A006F0667 /* FocusApp.swift */; };
 		F6F3EF102BF1048A006F0667 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F3EF0F2BF1048A006F0667 /* ContentView.swift */; };
@@ -37,6 +38,7 @@
 		F623853F2C87850B00EE3A79 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		F62385432C87862700EE3A79 /* URLExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtension.swift; sourceTree = "<group>"; };
 		F62385452C87872900EE3A79 /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
+		F64268D72D45802200DA0821 /* Noise.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Noise.metal; sourceTree = "<group>"; };
 		F672D7892C827D49003D974E /* QuoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteViewModel.swift; sourceTree = "<group>"; };
 		F6F3EF0A2BF1048A006F0667 /* Focus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Focus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6F3EF0D2BF1048A006F0667 /* FocusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusApp.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				F6F3EF1D2BF160EF006F0667 /* MainView.swift */,
+				F64268D72D45802200DA0821 /* Noise.metal */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				F62385402C87850B00EE3A79 /* CategoryModel.swift in Sources */,
 				F62385442C87862700EE3A79 /* URLExtension.swift in Sources */,
 				F60B95522C0E5D2C003AFEF3 /* MainViewModel.swift in Sources */,
+				F64268D82D45802200DA0821 /* Noise.metal in Sources */,
 				F672D78A2C827D49003D974E /* QuoteViewModel.swift in Sources */,
 				F6F3EF102BF1048A006F0667 /* ContentView.swift in Sources */,
 				F60B954E2C0E5CF7003AFEF3 /* QuoteView.swift in Sources */,

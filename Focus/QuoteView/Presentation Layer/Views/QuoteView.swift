@@ -13,12 +13,12 @@ struct QuoteView: View {
     var body: some View {
         VStack(spacing: 8) {
             Text(viewModel.text)
-                .font(.system(size: 40, weight: .light))
+                .font(.system(size: 40, weight: .light, design: .rounded))
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             Text(viewModel.author)
-                .font(.system(size: 25, weight: .light))
+                .font(.system(size: 25, weight: .light, design: .rounded))
                 .foregroundColor(.customGray)
                 .frame(maxWidth: .infinity, alignment: .leading)
             

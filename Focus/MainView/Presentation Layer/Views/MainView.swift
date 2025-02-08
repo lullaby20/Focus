@@ -9,12 +9,22 @@ import SwiftUI
 
 struct MainView: View {
     @ObservedObject var viewModel: MainViewModel
+    let startDate = Date()
     
     var body: some View {
-        contentBody()
-            .onAppear {
-                viewModel.getQuotes()
-            }
+        TimelineView(.animation) { context in
+            contentBody()
+                .onAppear {
+                    viewModel.getQuotes()
+                }
+                .background(
+                    Rectangle()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .ignoresSafeArea()
+                        .colorEffect(ShaderLibrary.noise(.float(startDate.timeIntervalSinceNow)))
+                        .opacity(0.2)
+                )
+        }
     }
     
     @ViewBuilder
@@ -30,21 +40,21 @@ struct MainView: View {
     }
     
     var contentView: some View {
-        VStack(spacing: 0) {
-            logoView
-            
-            ScrollView(.vertical, showsIndicators: false) {
-                LazyVStack(spacing: 0) {
-                    ForEach(viewModel.quoteViewModels, id: \.self) { viewModel in
-                        QuoteView(viewModel: viewModel)
-                            .containerRelativeFrame(.vertical, count: 1, spacing: 0)
-                    }
+        ScrollView(.vertical, showsIndicators: false) {
+            LazyVStack(spacing: 0) {
+                ForEach(viewModel.quoteViewModels, id: \.self) { viewModel in
+                    QuoteView(viewModel: viewModel)
+                        .containerRelativeFrame(.vertical, count: 1, spacing: 0)
                 }
-                .scrollTargetLayout()
             }
-            .ignoresSafeArea()
-            .scrollTargetBehavior(.paging)
-            
+            .scrollTargetLayout()
+        }
+        .ignoresSafeArea()
+        .scrollTargetBehavior(.paging)
+        .safeAreaInset(edge: .top) {
+            logoView
+        }
+        .safeAreaInset(edge: .bottom) {
             tapForMoreView
         }
         .padding(.horizontal, 30)
@@ -52,12 +62,17 @@ struct MainView: View {
             CategoriesView(viewModel: viewModel.categoriesViewModel) { categories in
                 viewModel.getQuotes(by: categories)
             }
-            .presentationDetents([.medium, .large])
+            .presentationDetents([.large])
         }
     }
     
     var logoView: some View {
         Image(.logo)
+            .padding(8)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color(.systemGray5))
+            )
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical, 8)
     }
@@ -70,6 +85,11 @@ struct MainView: View {
                 .font(.system(size: 20, weight: .regular))
                 .foregroundColor(.customGray)
         })
+        .padding(8)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color(.systemGray5))
+        )
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.vertical, 8)
     }

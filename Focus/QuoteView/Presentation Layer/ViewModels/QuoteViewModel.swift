@@ -23,7 +23,7 @@ final class QuoteViewModel: ObservableObject {
     }
     
     var shareText: String {
-        "Hey, look what i have found in Focus app!" + (model?.quote ?? "") + "\n- " + (model?.author ?? "")
+        "Hey, look what i have found in Focus app!\n" + (model?.quote ?? "") + "\n- " + (model?.author ?? "")
     }
     
     init(model: QuoteModel) {
