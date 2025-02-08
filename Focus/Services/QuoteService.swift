@@ -15,37 +15,45 @@ protocol QuoteServiceProtocol {
 
 struct QuoteService: QuoteServiceProtocol {
     func getRandomQuotes() -> AnyPublisher<[QuoteModel], Error> {
-        let url = URL.getAPIURL(byPath: "/quotes")!
-        
-        return URLSession.shared
-            .dataTaskPublisher(for: url)
-            .tryMap { element -> Data in
-                guard let httpResponse = element.response as? HTTPURLResponse,
-                          httpResponse.statusCode == 200 else {
-                    throw URLError(.badServerResponse)
-                }
-                
-                return element.data
-            }
-            .decode(type: [QuoteModel].self, decoder: JSONDecoder())
-            .eraseToAnyPublisher()
+        guard let url = URL.getAPIURL(byPath: "/quotes") else { fatalError() }
+        let urlRequest = URLRequest(url: url)
+
+        return executeURLRequest(urlRequest)
     }
     
     func getCategories() -> AnyPublisher<[CategoryModel], any Error> {
-//        let url = URL.getAPIURL(byPath: "/tags")!
-        let url = URL(string: "https://api.quotable.io/tags")!
+        guard let url = URL.getAPIURL(byPath: "/tags") else { preconditionFailure() }
+        let urlRequest = URLRequest(url: url)
         
+        return executeURLRequest(urlRequest)
+    }
+}
+
+// MARK: Execute URLRequest
+fileprivate extension QuoteService {
+    private func executeURLRequest<T>(_ urlRequest: URLRequest) -> AnyPublisher<T, Error> where T: Decodable {
         return URLSession.shared
-            .dataTaskPublisher(for: url)
-            .tryMap { element -> Data in
-                guard let httpResponse = element.response as? HTTPURLResponse,
+            .dataTaskPublisher(for: urlRequest)
+            .tryMap { result -> Data in
+                guard let httpResponse = result.response as? HTTPURLResponse,
                           httpResponse.statusCode == 200 else {
+                    
+                    #if DEBUG
+                    print("Data = \(String(describing: result.data.prettyPrintedJSONString))")
+                    #endif
+                    
                     throw URLError(.badServerResponse)
                 }
                 
-                return element.data
+                #if DEBUG
+                print("URLRequest = \(urlRequest)")
+                print("Result - \(result)")
+                print("Data = \(String(describing: result.data.prettyPrintedJSONString))")
+                #endif
+                
+                return result.data
             }
-            .decode(type: [CategoryModel].self, decoder: JSONDecoder())
+            .decode(type: T.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
 }
