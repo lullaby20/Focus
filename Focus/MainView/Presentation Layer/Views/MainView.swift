@@ -69,10 +69,7 @@ struct MainView: View {
     var logoView: some View {
         Image(.logo)
             .padding(8)
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(Color(.systemGray5))
-            )
+            .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical, 8)
     }
@@ -86,10 +83,7 @@ struct MainView: View {
                 .foregroundColor(.customGray)
         })
         .padding(8)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color(.systemGray5))
-        )
+        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.vertical, 8)
     }

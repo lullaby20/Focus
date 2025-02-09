@@ -27,13 +27,17 @@ struct QuoteView: View {
                     viewModel.save()
                 } label: {
                     Image(viewModel.isSaved ? .saveFill : .save)
+                        .bounceEffect()
                 }
+                .hapticEffect(style: .light)
 
                 Button {
                     viewModel.share()
                 } label: {
                     Image(.share)
+                        .bounceEffect()
                 }
+                .hapticEffect(style: .light)
 
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
