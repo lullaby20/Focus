@@ -15,7 +15,7 @@ final class MainViewModel: ObservableObject {
         case failure
     }
     
-    private var quoteService: QuoteServiceProtocol
+    private var quoteRemoteDataSource: QuoteRemoteDataSourceProtocol
     private var cancellables: Set<AnyCancellable> = .init()
     private(set) var quoteViewModels: [QuoteViewModel] = []
     private(set) var categoriesViewModel: CategoriesViewModel
@@ -23,15 +23,15 @@ final class MainViewModel: ObservableObject {
     @Published var state: State = .loading
     @Published var showCategoriesSheet: Bool = false
     
-    init(quoteService: QuoteServiceProtocol) {
-        self.quoteService = quoteService
-        self.categoriesViewModel = CategoriesViewModel(quoteService: quoteService)
+    init(quoteRemoteDataSource: QuoteRemoteDataSourceProtocol) {
+        self.quoteRemoteDataSource = quoteRemoteDataSource
+        self.categoriesViewModel = CategoriesViewModel(quoteRemoteDataSource: quoteRemoteDataSource)
     }
     
     func getQuotes() {
         self.state = .loading
         
-        quoteService.getRandomQuotes()
+        quoteRemoteDataSource.getRandomQuotes()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] status in
                 guard let self else { return }

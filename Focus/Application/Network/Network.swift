@@ -1,37 +1,19 @@
 //
-//  QuoteService.swift
+//  Network.swift
 //  Focus
 //
-//  Created by Daniyar Merekeyev on 04.06.2024.
+//  Created by Daniyar Merekeyev on 15.02.2025.
 //
 
-import Combine
 import Foundation
+import Combine
 
-protocol QuoteServiceProtocol {
-    func getRandomQuotes() -> AnyPublisher<[QuoteModel], Error>
-    func getCategories() -> AnyPublisher<[CategoryModel], Error>
+protocol Networking {
+    func executeURLRequest<T>(_ urlRequest: URLRequest) -> AnyPublisher<T, Error> where T: Decodable
 }
 
-struct QuoteService: QuoteServiceProtocol {
-    func getRandomQuotes() -> AnyPublisher<[QuoteModel], Error> {
-        guard let url = URL.getAPIURL(byPath: "/quotes") else { fatalError() }
-        let urlRequest = URLRequest(url: url)
-
-        return executeURLRequest(urlRequest)
-    }
-    
-    func getCategories() -> AnyPublisher<[CategoryModel], any Error> {
-        guard let url = URL.getAPIURL(byPath: "/tags") else { preconditionFailure() }
-        let urlRequest = URLRequest(url: url)
-        
-        return executeURLRequest(urlRequest)
-    }
-}
-
-// MARK: Execute URLRequest
-fileprivate extension QuoteService {
-    private func executeURLRequest<T>(_ urlRequest: URLRequest) -> AnyPublisher<T, Error> where T: Decodable {
+final class Network: Networking {
+    func executeURLRequest<T>(_ urlRequest: URLRequest) -> AnyPublisher<T, Error> where T: Decodable {
         return URLSession.shared
             .dataTaskPublisher(for: urlRequest)
             .tryMap { result -> Data in

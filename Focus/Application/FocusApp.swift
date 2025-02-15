@@ -23,11 +23,11 @@ struct FocusApp: App {
         }
     }()
     
-    let quoteService = QuoteService()
+    let network = Network()
 
     var body: some Scene {
         WindowGroup {
-            MainView(viewModel: MainViewModel(quoteService: quoteService))
+            MainView(viewModel: MainViewModel(quoteRemoteDataSource: QuoteRemoteDataSource(network: network)))
         }
 //        .modelContainer(sharedModelContainer)
     }

@@ -15,21 +15,21 @@ final class CategoriesViewModel: ObservableObject {
         case failure
     }
     
-    private var quoteService: QuoteServiceProtocol
+    private var quoteRemoteDataSource: QuoteRemoteDataSourceProtocol
     private var cancellables: Set<AnyCancellable> = .init()
     private(set) var categories: [CategoryModel] = []
     var selectedCategories: [CategoryModel] = []
     
     @Published var state: State = .loading
     
-    init(quoteService: QuoteServiceProtocol) {
-        self.quoteService = quoteService
+    init(quoteRemoteDataSource: QuoteRemoteDataSourceProtocol) {
+        self.quoteRemoteDataSource = quoteRemoteDataSource
     }
     
     func getCategories() {
         self.state = .loading
         
-        quoteService.getCategories()
+        quoteRemoteDataSource.getCategories()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] status in
                 switch status {
