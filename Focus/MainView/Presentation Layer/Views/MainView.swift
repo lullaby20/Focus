@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
+    @Environment(\.colorScheme) var colorScheme
     @ObservedObject var viewModel: MainViewModel
     let startDate = Date()
     
@@ -52,10 +53,10 @@ struct MainView: View {
         .ignoresSafeArea()
         .scrollTargetBehavior(.paging)
         .safeAreaInset(edge: .top) {
-            logoView
+            topView
         }
         .safeAreaInset(edge: .bottom) {
-            tapForMoreView
+            tapForMoreButtonView
         }
         .padding(.horizontal, 30)
         .sheet(isPresented: $viewModel.showCategoriesSheet) {
@@ -69,30 +70,50 @@ struct MainView: View {
     var logoView: some View {
         Image(.logo)
             .padding(8)
-            .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
+            .background(logoBackgroundColor, in: RoundedRectangle(cornerRadius: 12))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical, 8)
     }
     
-    var tapForMoreView: some View {
+    var tapForMoreButtonView: some View {
         Button(action: {
             viewModel.openCategories()
         }, label: {
             Text("tap for more")
                 .font(.system(size: 19, weight: .regular, design: .rounded))
-                .foregroundColor(.white)
+                .foregroundColor(tapForMoreTextColor)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 10)
+                .background(tapForMoreBackgroundColor, in: RoundedRectangle(cornerRadius: 12))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.vertical, 8)
         })
-        .padding(.vertical, 8)
-        .padding(.horizontal, 10)
-        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.vertical, 8)
+    }
+    
+    var savedButtonView: some View {
+        Button(action: {
+            //
+        }, label: {
+            savedButtonIcon
+                .padding(8)
+                .background(savedButtonBackgroundColor, in: RoundedRectangle(cornerRadius: 12))
+        })
+    }
+    
+    var topView: some View {
+        HStack(spacing: 8) {
+            logoView
+            
+            Spacer()
+            
+            savedButtonView
+        }
     }
     
     var loadingView: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
-                logoView
+                topView
                 
                 Spacer()
                 
@@ -109,9 +130,32 @@ struct MainView: View {
                 
                 Spacer()
                 
-                tapForMoreView
+                tapForMoreButtonView
             }
             .padding(.horizontal, 30)
         }
+    }
+}
+
+// MARK: Computed Properties
+fileprivate extension MainView {
+    var logoBackgroundColor: Color {
+        colorScheme == .dark ? Color(.systemGray5) : .white
+    }
+    
+    var savedButtonIcon: Image {
+        colorScheme == .dark ? Image(.saveFillWhite) : Image(.saveFillBlack)
+    }
+    
+    var tapForMoreBackgroundColor: Color {
+        colorScheme == .dark ? Color(.systemGray5) : .white
+    }
+    
+    var tapForMoreTextColor: Color {
+        colorScheme == .dark ? .white : .black
+    }
+    
+    var savedButtonBackgroundColor: Color {
+        colorScheme == .dark ? Color(.systemGray5) : .white
     }
 }
