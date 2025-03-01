@@ -111,29 +111,24 @@ struct MainView: View {
     }
     
     var loadingView: some View {
-        GeometryReader { geometry in
+        ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 0) {
-                topView
-                
-                Spacer()
-                
-                ScrollView(.vertical, showsIndicators: false) {
-                    LazyVStack(spacing: 0) {
-                        ForEach(0..<5, id: \.self) { _ in
-                            LoadingQuoteView()
-                                .frame(height: geometry.size.height * 0.91)
-                        }
-                    }
-                    .scrollTargetLayout()
+                ForEach(0..<5, id: \.self) { _ in
+                    LoadingQuoteView()
+                        .containerRelativeFrame(.vertical, count: 1, spacing: 0)
                 }
-                .scrollTargetBehavior(.paging)
-                
-                Spacer()
-                
-                tapForMoreButtonView
             }
-            .padding(.horizontal, 30)
+            .scrollTargetLayout()
         }
+        .ignoresSafeArea()
+        .scrollTargetBehavior(.paging)
+        .safeAreaInset(edge: .top) {
+            topView
+        }
+        .safeAreaInset(edge: .bottom) {
+            tapForMoreButtonView
+        }
+        .padding(.horizontal, 30)
     }
 }
 
