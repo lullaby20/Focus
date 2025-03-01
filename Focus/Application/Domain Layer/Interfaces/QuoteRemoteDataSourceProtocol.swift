@@ -9,5 +9,5 @@ import Combine
 
 protocol QuoteRemoteDataSourceProtocol {
     func getRandomQuotes() -> AnyPublisher<[QuoteModel], Error>
-    func getCategories() -> AnyPublisher<[CategoryModel], Error>
+    func getCategories() -> AnyPublisher<[String], Error>
 }

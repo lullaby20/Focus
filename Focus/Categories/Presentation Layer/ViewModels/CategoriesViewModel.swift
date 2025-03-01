@@ -40,7 +40,7 @@ final class CategoriesViewModel: ObservableObject {
                 }
             } receiveValue: { [weak self] categories in
                 guard let self else { return }
-                self.categories = categories
+                self.categories = categories.map { CategoryModel(name: $0) }
             }
             .store(in: &cancellables)
     }

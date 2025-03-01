@@ -18,13 +18,13 @@ struct QuoteRemoteDataSource {
 
 extension QuoteRemoteDataSource: QuoteRemoteDataSourceProtocol {
     func getRandomQuotes() -> AnyPublisher<[QuoteModel], Error> {
-        guard let url = URL.getAPIURL(byPath: "/quotes") else { fatalError() }
+        guard let url = URL.getAPIURL(byPath: "/quotes/random?count=20") else { fatalError() }
         let urlRequest = URLRequest(url: url)
 
         return network.executeURLRequest(urlRequest)
     }
     
-    func getCategories() -> AnyPublisher<[CategoryModel], any Error> {
+    func getCategories() -> AnyPublisher<[String], any Error> {
         guard let url = URL.getAPIURL(byPath: "/tags") else { preconditionFailure() }
         let urlRequest = URLRequest(url: url)
         

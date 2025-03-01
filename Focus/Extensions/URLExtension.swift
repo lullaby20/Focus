@@ -9,6 +9,6 @@ import Foundation
 
 extension URL {
     static func getAPIURL(byPath path: String) -> URL? {
-        URL(string: "https://zenquotes.io/api" + path)
+        URL(string: "https://quoteslate.vercel.app/api" + path)
     }
 }

@@ -10,8 +10,8 @@ struct QuoteModel: Codable {
     let author: String
     
     enum CodingKeys: String, CodingKey {
-        case quote = "q"
-        case author = "a"
+        case quote
+        case author
     }
 }
 
