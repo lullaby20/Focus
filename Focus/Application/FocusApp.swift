@@ -10,26 +10,20 @@ import SwiftData
 
 @main
 struct FocusApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    @State private var showLaunchScreen: Bool = true
     
     let network = Network()
+    let startDate = Date()
 
     var body: some Scene {
         WindowGroup {
-            MainView(viewModel: MainViewModel(quoteRemoteDataSource: QuoteRemoteDataSource(network: network)))
+            if showLaunchScreen {
+                LaunchView(showLaunchScreen: $showLaunchScreen, startDate: startDate)
+            } else {
+                MainView(viewModel: MainViewModel(quoteRemoteDataSource: QuoteRemoteDataSource(network: network)),
+                         startDate: startDate)
+            }
         }
-//        .modelContainer(sharedModelContainer)
     }
 }
 

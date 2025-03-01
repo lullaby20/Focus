@@ -25,6 +25,7 @@
 		F6828C102D61141000F6ACE5 /* QuoteRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6828C0F2D61141000F6ACE5 /* QuoteRemoteDataSource.swift */; };
 		F6828C122D61141F00F6ACE5 /* QuoteRemoteDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6828C112D61141F00F6ACE5 /* QuoteRemoteDataSourceProtocol.swift */; };
 		F6828C152D6114A800F6ACE5 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6828C142D6114A800F6ACE5 /* Network.swift */; };
+		F69685582D739AAF004DBB1A /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69685572D739AAF004DBB1A /* LaunchView.swift */; };
 		F6F3EF0E2BF1048A006F0667 /* FocusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F3EF0D2BF1048A006F0667 /* FocusApp.swift */; };
 		F6F3EF102BF1048A006F0667 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F3EF0F2BF1048A006F0667 /* ContentView.swift */; };
 		F6F3EF122BF1048A006F0667 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F3EF112BF1048A006F0667 /* Item.swift */; };
@@ -52,6 +53,7 @@
 		F6828C0F2D61141000F6ACE5 /* QuoteRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteRemoteDataSource.swift; sourceTree = "<group>"; };
 		F6828C112D61141F00F6ACE5 /* QuoteRemoteDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteRemoteDataSourceProtocol.swift; sourceTree = "<group>"; };
 		F6828C142D6114A800F6ACE5 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		F69685572D739AAF004DBB1A /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		F6F3EF0A2BF1048A006F0667 /* Focus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Focus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6F3EF0D2BF1048A006F0667 /* FocusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusApp.swift; sourceTree = "<group>"; };
 		F6F3EF0F2BF1048A006F0667 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 		F60B95402C0E5C6C003AFEF3 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				F69685562D739AA1004DBB1A /* Launch */,
 				F6828C132D61149800F6ACE5 /* Network */,
 				F6828C0C2D6113FA00F6ACE5 /* Data Layer */,
 				F6828C0B2D6113F000F6ACE5 /* Domain Layer */,
@@ -325,6 +328,14 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		F69685562D739AA1004DBB1A /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				F69685572D739AAF004DBB1A /* LaunchView.swift */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
 		F6F3EF012BF1048A006F0667 = {
 			isa = PBXGroup;
 			children = (
@@ -452,6 +463,7 @@
 				F6828C102D61141000F6ACE5 /* QuoteRemoteDataSource.swift in Sources */,
 				F6F3EF102BF1048A006F0667 /* ContentView.swift in Sources */,
 				F60B954E2C0E5CF7003AFEF3 /* QuoteView.swift in Sources */,
+				F69685582D739AAF004DBB1A /* LaunchView.swift in Sources */,
 				F60B95502C0E5D11003AFEF3 /* LoadingQuoteView.swift in Sources */,
 				F638F1442D59306800D16210 /* BounceEffectModifier.swift in Sources */,
 				F62385462C87872900EE3A79 /* CategoriesViewModel.swift in Sources */,

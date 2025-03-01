@@ -10,7 +10,7 @@ import SwiftUI
 struct MainView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var viewModel: MainViewModel
-    let startDate = Date()
+    let startDate: Date
     
     var body: some View {
         TimelineView(.animation) { context in
