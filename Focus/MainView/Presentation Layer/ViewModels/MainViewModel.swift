@@ -12,7 +12,6 @@ final class MainViewModel: ObservableObject {
     enum State {
         case loading
         case content
-        case failure
     }
     
     private var quoteRemoteDataSource: QuoteRemoteDataSourceProtocol
@@ -39,7 +38,7 @@ final class MainViewModel: ObservableObject {
                 case .finished:
                     self.state = .content
                 case .failure:
-                    self.state = .failure
+                    return
                 }
             } receiveValue: { [weak self] quotes in
                 guard let self else { return }

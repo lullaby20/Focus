@@ -14,29 +14,40 @@ struct MainView: View {
     
     var body: some View {
         TimelineView(.animation) { context in
-            contentBody()
-                .onAppear {
-                    viewModel.getQuotes()
+            Rectangle()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .ignoresSafeArea()
+                .colorEffect(ShaderLibrary.noise(.float(startDate.timeIntervalSinceNow)))
+                .opacity(0.2)
+                .overlay {
+                    contentBodyView
+                        .onAppear {
+                            viewModel.getQuotes()
+                        }
+                        .safeAreaInset(edge: .top) {
+                            topView
+                        }
+                        .safeAreaInset(edge: .bottom) {
+                            tapForMoreButtonView
+                        }
+                        .padding(.horizontal, 24)
+                        .sheet(isPresented: $viewModel.showCategoriesSheet) {
+                            CategoriesView(viewModel: viewModel.categoriesViewModel) { categories in
+                                viewModel.getQuotes(by: categories)
+                            }
+                            .presentationDetents([.large])
+                        }
                 }
-                .background(
-                    Rectangle()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .ignoresSafeArea()
-                        .colorEffect(ShaderLibrary.noise(.float(startDate.timeIntervalSinceNow)))
-                        .opacity(0.2)
-                )
         }
     }
     
     @ViewBuilder
-    private func contentBody() -> some View {
+    private var contentBodyView: some View {
         switch viewModel.state {
         case .loading:
             loadingView
         case .content:
             contentView
-        case .failure:
-            EmptyView()
         }
     }
     
@@ -52,19 +63,6 @@ struct MainView: View {
         }
         .ignoresSafeArea()
         .scrollTargetBehavior(.paging)
-        .safeAreaInset(edge: .top) {
-            topView
-        }
-        .safeAreaInset(edge: .bottom) {
-            tapForMoreButtonView
-        }
-        .padding(.horizontal, 30)
-        .sheet(isPresented: $viewModel.showCategoriesSheet) {
-            CategoriesView(viewModel: viewModel.categoriesViewModel) { categories in
-                viewModel.getQuotes(by: categories)
-            }
-            .presentationDetents([.large])
-        }
     }
     
     var logoView: some View {
@@ -72,7 +70,6 @@ struct MainView: View {
             .padding(8)
             .background(logoBackgroundColor, in: RoundedRectangle(cornerRadius: 12))
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.vertical, 8)
     }
     
     var tapForMoreButtonView: some View {
@@ -88,6 +85,7 @@ struct MainView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.vertical, 8)
         })
+        .hapticEffect(style: .rigid)
     }
     
     var savedButtonView: some View {
@@ -101,13 +99,14 @@ struct MainView: View {
     }
     
     var topView: some View {
-        HStack(spacing: 8) {
+        HStack {
             logoView
             
             Spacer()
             
             savedButtonView
         }
+        .padding(.vertical, 8)
     }
     
     var loadingView: some View {
@@ -122,35 +121,33 @@ struct MainView: View {
         }
         .ignoresSafeArea()
         .scrollTargetBehavior(.paging)
-        .safeAreaInset(edge: .top) {
-            topView
-        }
-        .safeAreaInset(edge: .bottom) {
-            tapForMoreButtonView
-        }
-        .padding(.horizontal, 30)
     }
 }
 
 // MARK: Computed Properties
 fileprivate extension MainView {
     var logoBackgroundColor: Color {
-        colorScheme == .dark ? Color(.systemGray5) : .white
+        Color(colorScheme == .dark ? .systemGray5 : .white)
     }
     
     var savedButtonIcon: Image {
-        colorScheme == .dark ? Image(.saveFillWhite) : Image(.saveFillBlack)
+        Image(colorScheme == .dark ? .saveFillWhite : .saveFillBlack)
     }
     
     var tapForMoreBackgroundColor: Color {
-        colorScheme == .dark ? Color(.systemGray5) : .white
+        Color(colorScheme == .dark ? .systemGray5 : .white)
     }
     
     var tapForMoreTextColor: Color {
-        colorScheme == .dark ? .white : .black
+        Color(colorScheme == .dark ? .white : .black)
     }
     
     var savedButtonBackgroundColor: Color {
-        colorScheme == .dark ? Color(.systemGray5) : .white
+        Color(colorScheme == .dark ? .systemGray5 : .white)
     }
+}
+
+#Preview {
+    let viewModel = MainViewModel(quoteRemoteDataSource: QuoteRemoteDataSource(network: Network()))
+    MainView(viewModel: viewModel, startDate: Date())
 }

@@ -20,6 +20,7 @@
 		F638F1402D592FFC00D16210 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F638F13F2D592FFC00D16210 /* ViewExtension.swift */; };
 		F638F1442D59306800D16210 /* BounceEffectModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F638F1432D59306800D16210 /* BounceEffectModifier.swift */; };
 		F638F1462D5932C800D16210 /* HapticEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = F638F1452D5932C800D16210 /* HapticEffect.swift */; };
+		F641A79F2E2D92C7004B0127 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F641A79E2E2D92C7004B0127 /* SkeletonView.swift */; };
 		F64268D82D45802200DA0821 /* Noise.metal in Sources */ = {isa = PBXBuildFile; fileRef = F64268D72D45802200DA0821 /* Noise.metal */; };
 		F672D78A2C827D49003D974E /* QuoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F672D7892C827D49003D974E /* QuoteViewModel.swift */; };
 		F6828C102D61141000F6ACE5 /* QuoteRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6828C0F2D61141000F6ACE5 /* QuoteRemoteDataSource.swift */; };
@@ -48,6 +49,7 @@
 		F638F13F2D592FFC00D16210 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		F638F1432D59306800D16210 /* BounceEffectModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BounceEffectModifier.swift; sourceTree = "<group>"; };
 		F638F1452D5932C800D16210 /* HapticEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticEffect.swift; sourceTree = "<group>"; };
+		F641A79E2E2D92C7004B0127 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		F64268D72D45802200DA0821 /* Noise.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Noise.metal; sourceTree = "<group>"; };
 		F672D7892C827D49003D974E /* QuoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteViewModel.swift; sourceTree = "<group>"; };
 		F6828C0F2D61141000F6ACE5 /* QuoteRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteRemoteDataSource.swift; sourceTree = "<group>"; };
@@ -288,6 +290,22 @@
 			path = BounceEffect;
 			sourceTree = "<group>";
 		};
+		F641A79C2E2D92A9004B0127 /* UI Components */ = {
+			isa = PBXGroup;
+			children = (
+				F641A79D2E2D92BC004B0127 /* Skeleton View */,
+			);
+			path = "UI Components";
+			sourceTree = "<group>";
+		};
+		F641A79D2E2D92BC004B0127 /* Skeleton View */ = {
+			isa = PBXGroup;
+			children = (
+				F641A79E2E2D92C7004B0127 /* SkeletonView.swift */,
+			);
+			path = "Skeleton View";
+			sourceTree = "<group>";
+		};
 		F6828C0B2D6113F000F6ACE5 /* Domain Layer */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +373,7 @@
 		F6F3EF0C2BF1048A006F0667 /* Focus */ = {
 			isa = PBXGroup;
 			children = (
+				F641A79C2E2D92A9004B0127 /* UI Components */,
 				F638F1412D59302E00D16210 /* ViewModifiers */,
 				F62385412C87860F00EE3A79 /* Extensions */,
 				F62385362C87839100EE3A79 /* Categories */,
@@ -457,6 +476,7 @@
 				F62385402C87850B00EE3A79 /* CategoryModel.swift in Sources */,
 				F62385442C87862700EE3A79 /* URLExtension.swift in Sources */,
 				F638F1462D5932C800D16210 /* HapticEffect.swift in Sources */,
+				F641A79F2E2D92C7004B0127 /* SkeletonView.swift in Sources */,
 				F60B95522C0E5D2C003AFEF3 /* MainViewModel.swift in Sources */,
 				F64268D82D45802200DA0821 /* Noise.metal in Sources */,
 				F672D78A2C827D49003D974E /* QuoteViewModel.swift in Sources */,
